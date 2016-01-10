@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'HBRefreshCollectionView_Example', :exclusive => true do
+  pod "HBRefreshCollectionView", :path => "../"
+end
+
+target 'HBRefreshCollectionView_Tests', :exclusive => true do
+  pod "HBRefreshCollectionView", :path => "../"
+
+  
+end
