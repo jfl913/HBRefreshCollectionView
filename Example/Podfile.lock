@@ -1,0 +1,17 @@
+PODS:
+  - HBRefreshCollectionView (0.1.0):
+    - MJRefresh
+  - MJRefresh (3.1.0)
+
+DEPENDENCIES:
+  - HBRefreshCollectionView (from `../`)
+
+EXTERNAL SOURCES:
+  HBRefreshCollectionView:
+    :path: ../
+
+SPEC CHECKSUMS:
+  HBRefreshCollectionView: 35cdfdabd90431f0585fcb84e9247b89b4759041
+  MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
+
+COCOAPODS: 0.39.0

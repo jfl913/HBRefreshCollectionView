@@ -7,8 +7,11 @@
 //
 
 #import "HBViewController.h"
+#import "HBTestCollectionView.h"
 
 @interface HBViewController ()
+
+@property (nonatomic, strong) HBTestCollectionView *testCollectionView;
 
 @end
 
@@ -18,12 +21,21 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    [self.view addSubview:self.testCollectionView];
 }
 
-- (void)didReceiveMemoryWarning
+#pragma mark - Accessors
+
+- (HBTestCollectionView *)testCollectionView
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    if (!_testCollectionView) {
+        CGFloat yPos = 20;
+        CGFloat width = CGRectGetWidth([UIScreen mainScreen].bounds);
+        CGFloat height = CGRectGetHeight([UIScreen mainScreen].bounds) - yPos;
+        _testCollectionView = [[HBTestCollectionView alloc] initWithFrame:CGRectMake(0, yPos, width, height) collectionViewLayout:[UICollectionViewFlowLayout new]];
+    }
+    
+    return _testCollectionView;
 }
 
 @end

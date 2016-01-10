@@ -22,6 +22,7 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		B6068C3F1C4250EA00428647 /* HBTestCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B6068C3E1C4250EA00428647 /* HBTestCollectionView.m */; };
 		EA31D46E8C0D4C1161EE1C00 /* Pods_HBRefreshCollectionView_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 211CD5F8852CD169365B3233 /* Pods_HBRefreshCollectionView_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +64,8 @@
 		8732C91A0094C424A6376815 /* Pods-HBRefreshCollectionView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBRefreshCollectionView_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-HBRefreshCollectionView_Example/Pods-HBRefreshCollectionView_Example.release.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8D9CF69FA0F0A689B19764E1 /* Pods-HBRefreshCollectionView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HBRefreshCollectionView_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HBRefreshCollectionView_Example/Pods-HBRefreshCollectionView_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		B6068C3D1C4250EA00428647 /* HBTestCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HBTestCollectionView.h; sourceTree = "<group>"; };
+		B6068C3E1C4250EA00428647 /* HBTestCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HBTestCollectionView.m; sourceTree = "<group>"; };
 		EBDD9AD796C2DF6829AE73ED /* HBRefreshCollectionView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = HBRefreshCollectionView.podspec; path = ../HBRefreshCollectionView.podspec; sourceTree = "<group>"; };
 		EC0072F21D20ACA1CC9FD6B3 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -146,6 +149,8 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* HBViewController.h */,
 				6003F5A6195388D20070C39A /* HBViewController.m */,
+				B6068C3D1C4250EA00428647 /* HBTestCollectionView.h */,
+				B6068C3E1C4250EA00428647 /* HBTestCollectionView.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -392,6 +397,7 @@
 			files = (
 				6003F59E195388D20070C39A /* HBAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* HBViewController.m in Sources */,
+				B6068C3F1C4250EA00428647 /* HBTestCollectionView.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
