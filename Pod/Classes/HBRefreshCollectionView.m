@@ -8,6 +8,7 @@
 
 #import "HBRefreshCollectionView.h"
 #import "MJRefresh.h"
+#import "BBDIYHeader.h"
 
 @interface HBRefreshCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -27,7 +28,12 @@
         self.collectionView.delegate = self;
         self.collectionView.dataSource = self;
         __weak typeof(self) weakSelf = self;
-        self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//            if ([weakSelf.refreshDelegate respondsToSelector:@selector(sendFirstPageRequest)]) {
+//                [weakSelf.refreshDelegate sendFirstPageRequest];
+//            }
+//        }];
+        self.collectionView.mj_header = [BBDIYHeader headerWithRefreshingBlock:^{
             if ([weakSelf.refreshDelegate respondsToSelector:@selector(sendFirstPageRequest)]) {
                 [weakSelf.refreshDelegate sendFirstPageRequest];
             }
