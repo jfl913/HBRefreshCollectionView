@@ -23,6 +23,7 @@
         CGFloat width = CGRectGetWidth(frame);
         CGFloat height = CGRectGetHeight(frame);
         self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, width, height) collectionViewLayout:layout];
+        self.collectionView.backgroundColor = [UIColor whiteColor];
         self.collectionView.delegate = self;
         self.collectionView.dataSource = self;
         __weak typeof(self) weakSelf = self;
