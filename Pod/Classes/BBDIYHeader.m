@@ -10,6 +10,9 @@
 #import "BBPodBundle.h"
 #import "UIImage+GIF.h"
 
+#define kIndicatorWidth 20
+#define kBottomSpacing 10
+
 @interface BBDIYHeader ()
 
 @property (nonatomic, strong) UIImageView *titleImageView;
@@ -27,7 +30,7 @@
     [super prepare];
     
     // 设置控件的高度
-    self.mj_h = 176;
+    self.mj_h = 65;
     
     UIImage *titleImage = [UIImage imageWithContentsOfFile:[BBPodBundle pathForResource:@"img_c2c_refresh_down@2x" ofType:@"png"]];
     self.titleImageView = [[UIImageView alloc] initWithImage:titleImage];
@@ -54,13 +57,13 @@
     CGFloat titleImageWidth = 120;
     CGFloat titleImageHeight = 137;
     CGFloat titleImageXPos = (self.mj_w - titleImageWidth) / 2.0;
-    CGFloat titleImageYPos = 8;
+    CGFloat titleImageYPos = self.mj_h - kBottomSpacing - kIndicatorWidth - titleImageHeight;
     self.titleImageView.frame = CGRectMake(titleImageXPos, titleImageYPos, titleImageWidth, titleImageHeight);
     
     CGFloat logoImageWidth = 55;
     CGFloat logoImageHeight = logoImageWidth;
     CGFloat logoImageXPos = self.mj_w - logoImageWidth - 16;
-    CGFloat logoImageYPos = self.mj_h - logoImageHeight;
+    CGFloat logoImageYPos = self.mj_h - logoImageHeight - kBottomSpacing / 2;
     self.logoGifImageView.frame = CGRectMake(logoImageXPos, logoImageYPos, logoImageWidth, logoImageHeight);
     
     CGFloat arrowImageWidth = 20;
