@@ -11,7 +11,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  HBRefreshCollectionView: 35cdfdabd90431f0585fcb84e9247b89b4759041
+  HBRefreshCollectionView: 305e322ade7cbd16ab68f5a631a80a3c4a52eed1
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
 
 COCOAPODS: 0.39.0

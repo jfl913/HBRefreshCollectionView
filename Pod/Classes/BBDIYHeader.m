@@ -32,7 +32,7 @@
     // 设置控件的高度
     self.mj_h = 65;
     
-    UIImage *titleImage = [UIImage imageWithContentsOfFile:[BBPodBundle pathForResource:@"img_c2c_refresh_down@2x" ofType:@"png"]];
+    UIImage *titleImage = [UIImage imageNamed:[BBPodBundle getImagePath:@"img_c2c_refresh_down"]];
     self.titleImageView = [[UIImageView alloc] initWithImage:titleImage];
     [self addSubview:self.titleImageView];
     
@@ -40,7 +40,7 @@
     self.logoGifImageView = [[UIImageView alloc] initWithImage:logoImage];
     [self addSubview:self.logoGifImageView];
     
-    UIImage *arrowImage = [UIImage imageWithContentsOfFile:[BBPodBundle pathForResource:@"ic_refresh_down@2x" ofType:@"png"]];
+    UIImage *arrowImage = [UIImage imageNamed:[BBPodBundle getImagePath:@"ic_refresh_down"]];
     self.arrowImageView = [[UIImageView alloc] initWithImage:arrowImage];
     [self addSubview:self.arrowImageView];
     
