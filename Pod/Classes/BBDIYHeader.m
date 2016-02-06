@@ -103,15 +103,38 @@
     MJRefreshCheckState;
     
     switch (state) {
-        case MJRefreshStateIdle:
+        case MJRefreshStateIdle: {
+            if (oldState == MJRefreshStateRefreshing) {
+                self.arrowImageView.transform = CGAffineTransformIdentity;
+                [UIView animateWithDuration:MJRefreshSlowAnimationDuration animations:^{
+                    self.activityIndicatorView.alpha = 0.0;
+                } completion:^(BOOL finished) {
+                    if (self.state != MJRefreshStateIdle) return;
+                    
+                    self.activityIndicatorView.alpha = 1.0;
+                    [self.activityIndicatorView stopAnimating];
+                    self.arrowImageView.hidden = NO;
+                }];
+            } else {
+                [self.activityIndicatorView stopAnimating];
+                self.arrowImageView.hidden = NO;
+                [UIView animateWithDuration:MJRefreshFastAnimationDuration animations:^{
+                    self.arrowImageView.transform = CGAffineTransformIdentity;
+                }];
+            }
+            break; }
+        case MJRefreshStatePulling: {
             [self.activityIndicatorView stopAnimating];
-            break;
-        case MJRefreshStatePulling:
-            [self.activityIndicatorView stopAnimating];
-            break;
-        case MJRefreshStateRefreshing:
+            self.arrowImageView.hidden = NO;
+            [UIView animateWithDuration:MJRefreshFastAnimationDuration animations:^{
+                self.arrowImageView.transform = CGAffineTransformMakeRotation(- M_PI);
+            }];
+            break; }
+        case MJRefreshStateRefreshing: {
+            self.arrowImageView.hidden = YES;
+            self.activityIndicatorView.alpha = 1.0;
             [self.activityIndicatorView startAnimating];
-            break;
+            break; }
         default:
             break;
     }
