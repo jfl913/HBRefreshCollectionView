@@ -9,8 +9,10 @@
 #import "HBRefreshCollectionView.h"
 #import "MJRefresh.h"
 #import "BBDIYHeader.h"
+#import "BBPodBundle.h"
+#import "UIScrollView+EmptyDataSet.h"
 
-@interface HBRefreshCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface HBRefreshCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @end
 
@@ -28,11 +30,6 @@
         self.collectionView.delegate = self;
         self.collectionView.dataSource = self;
         __weak typeof(self) weakSelf = self;
-//        self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-//            if ([weakSelf.refreshDelegate respondsToSelector:@selector(sendFirstPageRequest)]) {
-//                [weakSelf.refreshDelegate sendFirstPageRequest];
-//            }
-//        }];
         self.collectionView.mj_header = [BBDIYHeader headerWithRefreshingBlock:^{
             if ([weakSelf.refreshDelegate respondsToSelector:@selector(sendFirstPageRequest)]) {
                 [weakSelf.refreshDelegate sendFirstPageRequest];
@@ -46,7 +43,12 @@
         self.collectionView.mj_footer.hidden = YES;
         [self addSubview:self.collectionView];
         
+        self.collectionView.emptyDataSetSource = self;
+        self.collectionView.emptyDataSetDelegate = self;
+        
         self.modelsArray = [@[] mutableCopy];
+        
+        self.emptyDataStatus = EmptyDataStatusLoading;
     }
     
     return self;
@@ -74,6 +76,12 @@
     }
 }
 
+- (void)failLoadCollectionViewData
+{
+    self.emptyDataStatus = EmptyDataStatusError;
+    [self.collectionView reloadEmptyDataSet];
+}
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -85,6 +93,60 @@
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UICollectionViewCell" forIndexPath:indexPath];
     return cell;
+}
+
+#pragma mark - DZNEmptyDataSetSource
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
+{
+    if (self.emptyDataStatus == EmptyDataStatusError) {
+        NSString *text = @"网络不给力，请稍后再试";
+        NSDictionary *attrs = @{NSFontAttributeName: [UIFont systemFontOfSize:17]};
+        return [[NSAttributedString alloc] initWithString:text attributes:attrs];
+    } else {
+        return nil;
+    }
+}
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
+{
+    UIImage *image;
+    if (self.emptyDataStatus == EmptyDataStatusError) {
+        image = [UIImage imageNamed:[BBPodBundle getImagePath:@"default_avatar_img"]];
+    } else if (self.emptyDataStatus == EmptyDataStatusEmpty) {
+        image = [UIImage imageNamed:[BBPodBundle getImagePath:@"order_empty"]];
+    }
+
+    return image;
+}
+
+- (UIView *)customViewForEmptyDataSet:(UIScrollView *)scrollView
+{
+    if (self.emptyDataStatus == EmptyDataStatusLoading) {
+        UIActivityIndicatorView *activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        [activityView startAnimating];
+        return activityView;
+    } else {
+        return nil;
+    }
+}
+
+- (CGFloat)spaceHeightForEmptyDataSet:(UIScrollView *)scrollView
+{
+    return 20;
+}
+
+#pragma mark - DZNEmptyDataSetDelegate
+
+- (void)emptyDataSet:(UIScrollView *)scrollView didTapView:(UIView *)view
+{
+    if (self.emptyDataStatus == EmptyDataStatusError) {
+        self.emptyDataStatus = EmptyDataStatusLoading;
+        [self.collectionView reloadEmptyDataSet];
+        if ([self.refreshDelegate respondsToSelector:@selector(sendFirstPageRequest)]) {
+            [self.refreshDelegate sendFirstPageRequest];
+        }
+    }
 }
 
 @end

@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef NS_ENUM(NSUInteger, EmptyDataStatus) {
+    EmptyDataStatusLoading,
+    EmptyDataStatusEmpty,
+    EmptyDataStatusError,
+};
+
 @protocol HBRefreshCollectionViewDelegate <NSObject>
 
 @optional
@@ -23,11 +29,14 @@
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *modelsArray;
 @property (nonatomic) NSInteger currentPage;
+@property (nonatomic) EmptyDataStatus emptyDataStatus;
 
 - (instancetype)initWithFrame:(CGRect)frame
          collectionViewLayout:(UICollectionViewLayout *)layout;
 
 - (void)finishLoadCollectionViewDataSource:(NSArray *)dataSource
                                     atPage:(NSInteger)currentPage;
+
+- (void)failLoadCollectionViewData;
 
 @end

@@ -12,7 +12,8 @@ static NSString *const cellReuseIdentifier = @"color";
 
 #define MJRandomColor [UIColor colorWithRed:arc4random_uniform(255)/255.0 green:arc4random_uniform(255)/255.0 blue:arc4random_uniform(255)/255.0 alpha:1]
 
-@interface HBTestCollectionView ()
+@interface HBTestCollectionView () <HBRefreshCollectionViewDelegate>
+
 
 @end
 
@@ -24,6 +25,7 @@ static NSString *const cellReuseIdentifier = @"color";
     if (self) {
         self.refreshDelegate = self;
         [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellReuseIdentifier];
+        [self sendFirstPageRequest];
     }
     
     return self;
