@@ -9,8 +9,10 @@
 #import "HBRefreshCollectionView.h"
 #import "MJRefresh.h"
 #import "BBDIYHeader.h"
+#import "BBDIYAutoFooter.h"
 #import "BBPodBundle.h"
 #import "UIScrollView+EmptyDataSet.h"
+#import "UIColor+Hex.h"
 
 @interface HBRefreshCollectionView () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
@@ -26,7 +28,7 @@
         CGFloat width = CGRectGetWidth(frame);
         CGFloat height = CGRectGetHeight(frame);
         self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, width, height) collectionViewLayout:layout];
-        self.collectionView.backgroundColor = [UIColor whiteColor];
+        self.collectionView.backgroundColor = [UIColor colorWithHex:0xf2f2f2];
         self.collectionView.delegate = self;
         self.collectionView.dataSource = self;
         __weak typeof(self) weakSelf = self;
@@ -35,14 +37,12 @@
                 [weakSelf.refreshDelegate sendFirstPageRequest];
             }
         }];
-        self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        self.collectionView.mj_footer = [BBDIYAutoFooter footerWithRefreshingBlock:^{
             if ([weakSelf.refreshDelegate respondsToSelector:@selector(sendNextPageRequest)]) {
                 [weakSelf.refreshDelegate sendNextPageRequest];
             }
         }];
-        MJRefreshAutoNormalFooter *footer = (MJRefreshAutoNormalFooter *)self.collectionView.mj_footer;
-        [footer setTitle:@"加载中..." forState:MJRefreshStateRefreshing];
-        [footer setTitle:@"没有更多了" forState:MJRefreshStateNoMoreData];
+
         self.collectionView.mj_footer.hidden = YES;
         [self addSubview:self.collectionView];
         
