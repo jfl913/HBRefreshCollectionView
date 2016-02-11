@@ -133,8 +133,9 @@
         loadingLabel.frame = CGRectMake(loadingLabelXPos, loadingLabelYPos, loadingLabelWidth, loadingLabelHeight);
         [_refreshingView addSubview:loadingLabel];
         
+        CGFloat spacing = 20;
         UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        activityIndicatorView.mj_x = loadingLabel.mj_x - 20 - activityIndicatorView.mj_w;
+        activityIndicatorView.mj_x = loadingLabel.mj_x - spacing - activityIndicatorView.mj_w;
         activityIndicatorView.mj_y = (kViewHeight - activityIndicatorView.mj_h) / 2.0;
         [activityIndicatorView startAnimating];
         [_refreshingView addSubview:activityIndicatorView];
@@ -148,7 +149,6 @@
 {
     if (!_noMoreView) {
         _noMoreView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kViewHeight)];
-        _noMoreView.backgroundColor = [UIColor colorWithHex:0xf2f2f2];
         CGFloat leftLineLeftSpacing = 12.0;
         CGFloat leftLineRightSpacing = 8.0;
 
