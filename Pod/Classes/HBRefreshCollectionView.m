@@ -72,7 +72,7 @@
         }
         self.collectionView.mj_footer.hidden = NO;
     } else {
-        self.collectionView.mj_footer.hidden = YES;
+        [self.collectionView.mj_footer endRefreshingWithNoMoreData];
     }
 }
 
