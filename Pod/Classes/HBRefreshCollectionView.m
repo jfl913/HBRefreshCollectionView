@@ -40,6 +40,9 @@
                 [weakSelf.refreshDelegate sendNextPageRequest];
             }
         }];
+        MJRefreshAutoNormalFooter *footer = (MJRefreshAutoNormalFooter *)self.collectionView.mj_footer;
+        [footer setTitle:@"加载中..." forState:MJRefreshStateRefreshing];
+        [footer setTitle:@"没有更多了" forState:MJRefreshStateNoMoreData];
         self.collectionView.mj_footer.hidden = YES;
         [self addSubview:self.collectionView];
         
