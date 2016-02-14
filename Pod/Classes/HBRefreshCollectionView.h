@@ -31,6 +31,7 @@ typedef NS_ENUM(NSUInteger, EmptyDataStatus) {
 @property (nonatomic, strong) NSMutableArray *modelsArray;
 @property (nonatomic) NSInteger currentPage;
 @property (nonatomic) EmptyDataStatus emptyDataStatus;
+@property (nonatomic) BOOL isHiddenPullToRefresh; // 是否隐藏下拉刷新, 默认为NO
 
 - (instancetype)initWithFrame:(CGRect)frame
          collectionViewLayout:(UICollectionViewLayout *)layout;

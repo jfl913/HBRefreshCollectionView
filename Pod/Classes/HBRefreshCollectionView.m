@@ -217,4 +217,11 @@
     return _goTopImageView;
 }
 
+- (void)setIsHiddenPullToRefresh:(BOOL)isHiddenPullToRefresh
+{
+    if (isHiddenPullToRefresh) {
+        self.collectionView.mj_header = nil;
+    }
+}
+
 @end
