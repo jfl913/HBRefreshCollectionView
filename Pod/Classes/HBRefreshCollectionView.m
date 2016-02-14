@@ -33,13 +33,13 @@
         self.collectionView.dataSource = self;
         __weak typeof(self) weakSelf = self;
         self.collectionView.mj_header = [BBDIYHeader headerWithRefreshingBlock:^{
-            if ([weakSelf.refreshDelegate respondsToSelector:@selector(sendFirstPageRequest)]) {
-                [weakSelf.refreshDelegate sendFirstPageRequest];
+            if ([weakSelf.refreshDelegate respondsToSelector:@selector(loadNewData)]) {
+                [weakSelf.refreshDelegate loadNewData];
             }
         }];
         self.collectionView.mj_footer = [BBDIYAutoFooter footerWithRefreshingBlock:^{
-            if ([weakSelf.refreshDelegate respondsToSelector:@selector(sendNextPageRequest)]) {
-                [weakSelf.refreshDelegate sendNextPageRequest];
+            if ([weakSelf.refreshDelegate respondsToSelector:@selector(loadMoreData)]) {
+                [weakSelf.refreshDelegate loadMoreData];
             }
         }];
 
@@ -149,8 +149,8 @@
     if (self.emptyDataStatus == EmptyDataStatusError) {
         self.emptyDataStatus = EmptyDataStatusLoading;
         [self.collectionView reloadEmptyDataSet];
-        if ([self.refreshDelegate respondsToSelector:@selector(sendFirstPageRequest)]) {
-            [self.refreshDelegate sendFirstPageRequest];
+        if ([self.refreshDelegate respondsToSelector:@selector(loadNewData)]) {
+            [self.refreshDelegate loadNewData];
         }
     }
 }

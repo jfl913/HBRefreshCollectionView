@@ -25,7 +25,7 @@ static NSString *const cellReuseIdentifier = @"color";
     if (self) {
         self.refreshDelegate = self;
         [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:cellReuseIdentifier];
-        [self sendFirstPageRequest];
+        [self loadNewData];
     }
     
     return self;
@@ -33,7 +33,7 @@ static NSString *const cellReuseIdentifier = @"color";
 
 #pragma mark - HBRefreshCollectionViewDelegate
 
-- (void)sendFirstPageRequest
+- (void)loadNewData
 {
     NSMutableArray *tmpArray = [@[] mutableCopy];
     for (int i = 0; i < 10; i++) {
@@ -45,7 +45,7 @@ static NSString *const cellReuseIdentifier = @"color";
     });
 }
 
-- (void)sendNextPageRequest
+- (void)loadMoreData
 {
     NSMutableArray *tmpArray = [@[] mutableCopy];
     for (int i = 0; i < 20; i++) {

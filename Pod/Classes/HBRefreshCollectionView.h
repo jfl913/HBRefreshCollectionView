@@ -18,8 +18,10 @@ typedef NS_ENUM(NSUInteger, EmptyDataStatus) {
 
 @optional
 
-- (void)sendFirstPageRequest;
-- (void)sendNextPageRequest;
+// 下拉刷新调用此方法
+- (void)loadNewData;
+// 上拉加载更多调用此方法
+- (void)loadMoreData;
 
 @end
 
