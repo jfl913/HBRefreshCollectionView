@@ -49,6 +49,9 @@
         self.collectionView.emptyDataSetSource = self;
         self.collectionView.emptyDataSetDelegate = self;
         
+        self.goTopImageView.hidden = YES;
+        [self addSubview:self.goTopImageView];
+        
         self.modelsArray = [@[] mutableCopy];
         
         self.emptyDataStatus = EmptyDataStatusLoading;
@@ -150,6 +153,68 @@
             [self.refreshDelegate sendFirstPageRequest];
         }
     }
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [self displayGoTopImageView:scrollView];
+}
+
+- (void)displayGoTopImageView:(UIScrollView *)scrollView
+{
+    CGFloat offset = scrollView.contentOffset.y;
+    CGFloat viewHeight = CGRectGetHeight(self.bounds);
+    if (offset > viewHeight) {
+        [UIView animateWithDuration:0.3
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseIn
+                         animations:^{
+                             self.goTopImageView.hidden = NO;
+                         } completion:nil];
+        
+    } else {
+        [UIView animateWithDuration:0.3
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseOut
+                         animations:^{
+                             self.goTopImageView.hidden = YES;
+                         } completion:nil];
+    }
+}
+
+#pragma mark - Gesture Method
+
+- (void)goTop:(UITapGestureRecognizer *)tapGesture
+{
+    [self.collectionView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+    self.goTopImageView.hidden = YES;
+}
+
+#pragma mark - Accessors
+
+- (UIImageView *)goTopImageView
+{
+    if (!_goTopImageView) {
+        CGFloat xPos = CGRectGetWidth(self.bounds) - 50;
+        CGFloat yPos = CGRectGetHeight(self.bounds) - 50;
+        CGFloat width = 40;
+        CGFloat height = 40;
+        _goTopImageView = [[UIImageView alloc] initWithFrame:CGRectMake(xPos, yPos, width, height)];
+        _goTopImageView.image = [UIImage imageNamed:[BBPodBundle getImagePath:@"ic_switch_top"]];
+        _goTopImageView.contentMode = UIViewContentModeCenter;
+        _goTopImageView.backgroundColor = [UIColor colorWithRed:255.0/255.0
+                                                          green:73.0/255.0
+                                                           blue:101.0/255.0
+                                                          alpha:0.7];
+        _goTopImageView.layer.cornerRadius = width / 2.0;
+        _goTopImageView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goTop:)];
+        [_goTopImageView addGestureRecognizer:tapGesture];
+    }
+    
+    return _goTopImageView;
 }
 
 @end

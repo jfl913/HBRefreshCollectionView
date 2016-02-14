@@ -48,7 +48,7 @@ static NSString *const cellReuseIdentifier = @"color";
 - (void)sendNextPageRequest
 {
     NSMutableArray *tmpArray = [@[] mutableCopy];
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 20; i++) {
         [tmpArray addObject:MJRandomColor];
     }
     
