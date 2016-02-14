@@ -12,6 +12,7 @@
 
 #define kIndicatorWidth 20
 #define kBottomSpacing 10
+#define kScreenWidth CGRectGetWidth([UIScreen mainScreen].bounds)
 
 @interface BBDIYHeader ()
 
@@ -32,8 +33,12 @@
     // 设置控件的高度
     self.mj_h = 65;
     
+    self.backgroundColor = [UIColor whiteColor];
+    
     UIImage *titleImage = [UIImage imageNamed:[BBPodBundle getImagePath:@"img_c2c_refresh_down"]];
     self.titleImageView = [[UIImageView alloc] initWithImage:titleImage];
+    self.titleImageView.backgroundColor = [UIColor whiteColor];
+    self.titleImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self addSubview:self.titleImageView];
     
     UIImage *logoImage = [UIImage sd_animatedGIFNamed:@"img_xiaobei"];
@@ -54,11 +59,9 @@
 {
     [super placeSubviews];
     
-    CGFloat titleImageWidth = 120;
     CGFloat titleImageHeight = 137;
-    CGFloat titleImageXPos = (self.mj_w - titleImageWidth) / 2.0;
     CGFloat titleImageYPos = self.mj_h - kBottomSpacing - kIndicatorWidth - titleImageHeight;
-    self.titleImageView.frame = CGRectMake(titleImageXPos, titleImageYPos, titleImageWidth, titleImageHeight);
+    self.titleImageView.frame = CGRectMake(0, titleImageYPos, kScreenWidth, titleImageHeight);
     
     CGFloat logoImageWidth = 55;
     CGFloat logoImageHeight = logoImageWidth;
